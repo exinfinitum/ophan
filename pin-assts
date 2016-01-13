@@ -1,0 +1,5 @@
+6: GND
+31, 37: Motor1 right back
+35, 33: Motor2 left back
+36, 32: Motor3 right front
+40, 38: Motor4 left front

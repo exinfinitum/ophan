@@ -1,0 +1,36 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OphanBot Interface</title>
+  <meta name="description" content="">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+<!-- <script src="3rdparty/angular/angular.js"></script> -->
+<script src="3rdparty/jquery/dist/jquery.js"></script>
+<script src="3rdparty/semantic/semantic.js"></script>
+<link rel="stylesheet" type="text/css" href="3rdparty/semantic/semantic.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="/css/main-styles.css">
+</head>
+<body ng-app="akiraInterface">
+<div class="ui navbar pointing menu">
+  <a href="/" class="brand item">OphanBot Interface System</a>
+  <a href="/control" class="item">Control</a>
+  <a href="/about" class="item">About</a>
+  <a href="/update" class="item">Update</a>
+
+</div>
+  <main class="ui page grid">
+    <div class="row">
+      <div class="center aligned starter column">
+        <h1 class="ui header">Welcome to OphanBot!</h1>
+        <p>Your Plastic Pal Who's Fun to Be With!</p>
+        <p>For best results, use Firefox.</p>
+      </div>
+    </div>
+  </main>
+<script src="/socket.io/socket.io.js"></script>
+<script src="jsfiles/frontend.js"></script>
+</body>
+</html>

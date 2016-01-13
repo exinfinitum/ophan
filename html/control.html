@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OphanBot Interface</title>
+  <meta name="description" content="">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+<!-- <script src="3rdparty/angular/angular.js"></script> -->
+<script src="3rdparty/jquery/dist/jquery.js"></script>
+<script src="3rdparty/semantic/semantic.js"></script>
+<link rel="stylesheet" type="text/css" href="3rdparty/semantic/semantic.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="/css/main-styles.css">
+</head>
+<body ng-app="akiraInterface">
+<div class="ui navbar pointing menu">
+  <a href="/" class="brand item">OphanBot Interface System</a>
+  <a href="/control" class="item">Control</a>
+  <a href="/about" class="item">About</a>
+  <a href="/update" class="item">Update</a>
+
+</div>
+
+<!-- <div class="ui tertiary grid form segment">
+  <div class="field">
+    <label></label> -->
+    <div class="ui equal width center aligned padded four column grid">
+      <div class="row">
+          <div id="btn-upleft" class="ui large icon blue button directional"><i class="arrow sign icon"></i></div>
+          <div id="btn-up" class="ui large icon blue button directional"><i class="arrow sign up icon"></i></div>
+          <div id="btn-upright" class="ui large icon blue button directional"><i class="arrow sign icon"></i></div>
+      </div>
+      <div class="row">
+          <div id="btn-left" class="ui large icon blue button directional"><i class="arrow sign left icon"></i></div>
+          <div id="btn-center" class="ui large icon blue button directional"><i class="stop icon"></i></div>
+          <div id="btn-right" class="ui large icon blue button directional"><i class="arrow sign right icon"></i></div>
+      </div>  
+      <div class="row">
+          <div id="btn-downleft" class="ui large icon blue button directional"><i class="arrow sign icon"></i></div>
+          <div id="btn-down" class="ui large icon blue button directional"><i class="arrow sign down icon"></i></div>
+          <div id="btn-downright" class="ui large icon blue button directional"><i class="arrow sign icon"></i></div>
+      </div>
+      <div class="column">
+<!--          <div id="btn-headlights" class="ui large orange button">Headlights</div> -->
+      </div>
+    </div>
+<!--  </div>
+</div> -->
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="jsfiles/frontend.js"></script>
+</body>
+</html>
