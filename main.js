@@ -13,9 +13,6 @@ var gpio = require('pi-gpio');
 
 var util = require('util');
 
-var git = require('gitty');
-var repo = git('/etc/ophan/');//replace with your data location
-
 const exec = require('child_process').exec;
 
 var rf_forward = 36;
@@ -31,7 +28,7 @@ var pin_assignments = {};
 
 var headlights="false";
 
-var updates_available="false";
+process.chdir('/etc/ophan/');
 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -140,43 +137,65 @@ function socketio_init () {io.on('connection', function(socket){
 		var get_remote_hash = ('git rev-parse origin/master');
 		var local_hash;
 		var remote_hash;
-		updates_available=false;
 
 		console.log('Check update');
-		function get_local() { 
+
+		function git_fetch(callback) { 
+		exec ('git fetch', function (err, stdout, stderr) {
+			if (err) {
+				console.log(err);
+				io.emit('update-error', stderr);
+				return;}
+			callback();
+		});}
+
+		function get_local(callback) { 
 		exec (get_local_hash, function (err, stdout, stderr) {
 			if (err) {
 				console.log(err);
-				io.emit('update-error', err);
+				io.emit('update-error', stderr);
 				return;}
 			local_hash = stdout;
+			callback();
 		});}
 
-//		function get_remote() {
-//		exec (get_remote_hash, function (err, stdout, stderr) {
-//			if (err) {
-//				io.emit('update-error', err);
-//				return;}
-//			remote_hash = stdout;
-//		});}
+		function get_remote(callback) { 
+		exec (get_remote_hash, function (err, stdout, stderr) {
+			if (err) {
+				console.log(err);
+				io.emit('update-error', stderr);
+				return;}
+			remote_hash = stdout;
+			callback();
+		});}
 
-
-		function get_remote() {
-					remote_hash = 'None';
-		};
-		
-		function check_updates() {
-		if (local_hash == remote_hash){
+		function check_updates(callback) {
+		if (local_hash === remote_hash){
 			io.emit('no-updates-available');}
 		else{
-			updates_available=true;
 			io.emit('updates-available');
-		}};
-		async.series([get_local, get_remote, check_updates])
+		}
+		callback();
+		};
+		async.series([git_fetch, get_local, get_remote, check_updates])
 	});
 
 	socket.on('perform-update', function () {
-		console.log('Imma update...');
+		//Perform a git pull. Warn the user that we're going to reboot the system.
+		console.log("Git pulling")
+		function perform_git_pull (callback) {
+		exec ("git pull --no-edit", function (err, stdout, stderr) {
+		console.log(err)
+		if (err) {
+			console.log(err);
+			io.emit('update-error', stderr);
+			return;}
+			console.log(stdout);
+
+		});
+		}
+		function update_alert() { io.emit('update-alert')};
+		async.series[perform_git_pull, update_alert];
 	});
 
 

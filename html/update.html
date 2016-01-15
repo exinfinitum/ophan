@@ -21,9 +21,26 @@
   <a href="/update" class="item">Update</a>
 
 </div>
-<script src="3rdparty/jquery/dist/jquery.js"></script>
+<div>
+
+    <div class="ui equal width center aligned padded one column grid">
+
 
 <div id="btn-update" class="ui large green button">Check for updates</div>
+<div class="row"> </div>
+	<div id="update-info" style="display:none;" class="ui info message">
+	<!-- <i class="close icon"></i> -->
+	<div id="update-info-header" class="header"></div>
+	<p id="update-info-msg"> </p>
+	</div>
+</div>
+	<div id="update-error" style="display:none;" class="ui error message">
+	<!-- <i class="close icon"></i> -->
+	<div id="update-error-header" class="header"></div>
+	<p id="update-error-msg"> </p>
+	</div>
+</div>
+</div>
 
 
 <script src="/socket.io/socket.io.js"></script>

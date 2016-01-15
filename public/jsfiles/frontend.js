@@ -1,5 +1,5 @@
 var socket = io();
-
+var updates_available = false;
 
 function registerButtonForHoldDown(buttonName, holdInterval){
 //	$(buttonName).mousedown( function() {
@@ -48,23 +48,52 @@ socket.on('headlights-pressed', function(theText){
 });
 
 $('#btn-update').bind('mousedown', function() {
-//	console.log('update');
-//	if (updates_available){
-//	socket.emit('perform-update');
-//	}
-//	else {
-	socket.emit('update-software-check');//}
+	console.log('update');
+	if (updates_available){
+	socket.emit('perform-update');
+	}
+	else {
+	socket.emit('update-software-check');}
 });
 
 socket.on('no-updates-available', function(){
 	//make something fade in and out, saying that there aren't any updates available
-	alert("No updates available!")
+	show_info('No updates available', 'Please try again later');
+});
+
+socket.on('updates-available', function(){
+	//make something fade in and out, saying that there aren't any updates available
+	updates_available = true;
+	$('#btn-update').html("Updates available - Click to update");
+});
+
+socket.on('update-alert', function(){
+	show_info('Update downloaded', "Reboot robot to complete update")
+
+	//alert('Updating server software. Robot will now reboot.')
 });
 
 socket.on('update-error', function(error){
 	//make something fade in and out, saying that there aren't any updates available
-	alert("An error occurred while updating: "+ JSON.stringify(error))
+	show_error('Update error', "An error occurred while updating: "+ JSON.stringify(error))
 });
+
+function show_error (headerMsg, errMsg){
+//make something fade in and out, saying that there aren't any updates available
+fadeLabel('#update-error', '#update-error-header', '#update-error-msg', headerMsg, 2000, errMsg)
+};
+
+function show_info (headerMsg, errMsg){
+//make something fade in and out, saying that there aren't any updates available
+fadeLabel('#update-info', '#update-info-header', '#update-info-msg', headerMsg, 2000, errMsg)
+};
+
+function fadeLabel (labelName, labelHeader, labelMessage, headerMsg, time, message) {
+	$(labelHeader).html(headerMsg);
+	$(labelMessage).html(message);
+	$(labelName).fadeIn(time);
+	$(labelName).fadeOut(time);
+};
 
 registerButtonForHoldDown('#btn-upleft',1);
 registerButtonForHoldDown('#btn-up',1);
