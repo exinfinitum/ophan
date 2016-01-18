@@ -195,7 +195,9 @@ function socketio_init () {io.on('connection', function(socket){
 		});
 		}
 		function update_alert() { io.emit('update-alert')};
-		async.series[perform_git_pull, update_alert];
+		function updating_alert() { io.emit('updating-alert')};
+
+		async.series[updating_alert, perform_git_pull, update_alert];
 	});
 
 

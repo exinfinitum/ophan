@@ -69,6 +69,13 @@ socket.on('updates-available', function(){
 
 socket.on('update-alert', function(){
 	show_info('Update downloaded', "Reboot robot to complete update")
+	$('#btn-update').html("Update complete - Reboot required");
+	//alert('Updating server software. Robot will now reboot.')
+});
+
+socket.on('updating-alert', function(){
+	show_info('Beginning update', "Please do not navigate away from this page")
+	$('#btn-update').html("Please wait, update in progress...");
 
 	//alert('Updating server software. Robot will now reboot.')
 });
