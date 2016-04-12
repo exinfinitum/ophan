@@ -39,7 +39,7 @@ socket.on('dir-btn-released', function(buttonName){
 	$(buttonName).removeClass('pressed');
 });
 
-$('#btn-demo').bind('mousedown', function() {
+$("btn-demo").bind('mousedown', function() {
 	socket.emit('demo-pressed');
 });
 
