@@ -39,12 +39,12 @@ socket.on('dir-btn-released', function(buttonName){
 	$(buttonName).removeClass('pressed');
 });
 
-$("btn-headlights").on('click', function() {
-	socket.emit('headlights-pressed');
+$("btn-demo").on('click', function() {
+	socket.emit('demo-pressed');
 });
 
-socket.on('headlights-pressed', function(theText){
-	$("btn-headlights").innerHTML = theText;
+socket.on('demo-pressed', function(theText){
+	$("btn-demo").innerHTML = theText;
 });
 
 $('#btn-update').bind('mousedown', function() {
