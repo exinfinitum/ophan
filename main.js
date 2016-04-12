@@ -26,8 +26,6 @@ var rb_backward = 37
 
 var pin_assignments = {};
 
-var headlights="false";
-
 process.chdir('/etc/ophan/');
 
 app.use(express.static(path.join(__dirname,'public')));
@@ -117,18 +115,6 @@ function socketio_init () {io.on('connection', function(socket){
 			gpio_low(pin_assignments[buttonName][i]);
 		}}
 		io.emit('dir-btn-released',buttonName);
-	});
-
-	socket.on('headlights-pressed', function(){
-		console.log("headlights are ", headlights);
-		headlights = !Boolean(headlights);
-		var text = "";
-		if (headlights) {
-			text = "On";
-		} else {
-			text = "Off";
-		}
-		io.emit('headlights-pressed', "Headlights ".concat(text));
 	});
 
 	socket.on('update-software-check', function(){

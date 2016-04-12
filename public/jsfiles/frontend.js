@@ -39,13 +39,6 @@ socket.on('dir-btn-released', function(buttonName){
 	$(buttonName).removeClass('pressed');
 });
 
-$("btn-headlights").on('click', function() {
-	socket.emit('headlights-pressed');
-});
-
-socket.on('headlights-pressed', function(theText){
-	$("btn-headlights").innerHTML = theText;
-});
 
 $('#btn-update').bind('mousedown', function() {
 	console.log('update');
