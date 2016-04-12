@@ -122,6 +122,7 @@ function socketio_init () {io.on('connection', function(socket){
 	socket.on('demo-pressed', function(){
 		
 		demo = !Boolean(demo);
+		console.log("DEMO pressed")
 		var text = "";
 		if (demo) {
 		for (var i = 0; i < pin_assignments['#btn-right'].length; i++){

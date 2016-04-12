@@ -39,12 +39,12 @@ socket.on('dir-btn-released', function(buttonName){
 	$(buttonName).removeClass('pressed');
 });
 
-$("btn-demo").on('click', function() {
+$('#btn-demo').bind('mousedown', function() {
 	socket.emit('demo-pressed');
 });
 
 socket.on('demo-pressed', function(theText){
-	$("btn-demo").innerHTML = theText;
+	$('#btn-demo').innerHTML = theText;
 });
 
 $('#btn-update').bind('mousedown', function() {
